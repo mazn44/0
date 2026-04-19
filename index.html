@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قسم التسويق | معرض إيفان للأثاث — دهوك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg:#050b18;--surface:rgba(10,20,40,0.7);--surface2:rgba(6,14,28,0.85);
+  --border:rgba(255,255,255,0.07);--text:#f0f6ff;--muted:#7a92b8;
+  --r:18px;--shadow:0 8px 40px rgba(0,0,0,0.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 20% 20%,rgba(168,85,247,0.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(99,102,241,0.10) 0%,transparent 60%);pointer-events:none;z-index:0;}
+#pc{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:linear-gradient(#a855f7,#c084fc);border-radius:10px;}
+
+/* HEADER */
+.hdr{
+  position:fixed;top:0;width:100%;z-index:100;
+  background:rgba(5,11,24,0.88);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  padding:14px 40px;display:flex;justify-content:space-between;align-items:center;
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-icon{
+  width:46px;height:46px;border-radius:14px;
+  background:linear-gradient(135deg,#a855f7,#c084fc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:#fff;box-shadow:0 0 20px rgba(168,85,247,0.15);
+}
+.brand-text h1{font-size:18px;font-weight:900;color:#a855f7;}
+.brand-text p{font-size:11px;color:var(--muted);margin-top:1px;}
+.dept-chip{
+  padding:7px 18px;border-radius:30px;font-size:12px;font-weight:800;letter-spacing:1px;
+  background:rgba(255,255,255,.04);border:1px solid #a855f7;color:#a855f7;
+}
+
+/* HERO */
+.hero{
+  text-align:center;padding:130px 5% 60px;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(168,85,247,0.15) 0%,transparent 70%);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:30px;font-size:13px;font-weight:700;letter-spacing:1px;
+  background:rgba(255,255,255,.04);border:1px solid #a855f7;color:#a855f7;
+  margin-bottom:20px;
+}
+.hero h2{font-size:clamp(2em,5vw,3.5em);font-weight:900;margin-bottom:12px;color:var(--text);}
+.hero h2 em{color:#a855f7;font-style:normal;}
+.hero p{font-size:1em;color:var(--muted);max-width:650px;margin:0 auto;line-height:1.75;}
+
+/* STATS */
+.stats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:40px auto 0;max-width:700px;}
+.stat{
+  flex:1;min-width:120px;text-align:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:18px 14px;
+  border-top:2px solid #a855f7;
+}
+.stat-n{font-size:2em;font-weight:900;color:#a855f7;display:block;}
+.stat-l{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* SECTIONS */
+.sec{max-width:1300px;margin:0 auto;padding:0 5% 70px;}
+.sec-head{
+  display:flex;align-items:center;gap:16px;
+  padding:28px 0 20px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:28px;
+}
+.sec-icon{
+  width:56px;height:56px;border-radius:16px;
+  background:linear-gradient(135deg,#a855f7,#c084fc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;box-shadow:0 0 24px rgba(168,85,247,0.15);
+  flex-shrink:0;
+}
+.sec-head h3{font-size:22px;font-weight:900;color:#a855f7;}
+.sec-head p{font-size:13px;color:var(--muted);margin-top:3px;}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;}
+.grid3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+
+/* CARDS */
+.card{
+  background:var(--surface);backdrop-filter:blur(20px);
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:26px;box-shadow:var(--shadow);
+  transition:all .4s cubic-bezier(.175,.885,.32,1.2);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(24px);
+}
+.card.vis{opacity:1;transform:translateY(0);}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#a855f7,transparent);
+}
+.card:hover{transform:translateY(-7px);border-color:#a855f7;box-shadow:0 20px 50px rgba(168,85,247,0.15);}
+
+/* LIST BOXES */
+.lb{margin-bottom:18px;}
+.lb-title{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:800;padding:6px 16px;border-radius:10px;
+  margin-bottom:14px;
+}
+.lb-ok .lb-title{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.25);}
+.lb-no .lb-title{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.25);}
+.lb ul{list-style:none;padding-right:4px;}
+.lb ul li{
+  position:relative;padding:8px 32px 8px 8px;margin-bottom:6px;
+  font-size:14px;font-weight:500;line-height:1.55;
+  border-radius:10px;background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.04);
+  transition:.25s;
+}
+.lb ul li:hover{background:rgba(255,255,255,.05);}
+.lb-ok ul li::before{
+  content:'✓';position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-weight:900;font-size:13px;color:#10b981;
+}
+.lb-no ul li::before{
+  content:'✗';position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-weight:900;font-size:13px;color:#ef4444;
+}
+.lb ul li strong{color:var(--text);}
+
+/* SYSTEM STEPS */
+.steps{display:flex;flex-direction:column;gap:10px;}
+.step{
+  display:flex;align-items:flex-start;gap:14px;
+  background:rgba(0,0,0,.25);border-radius:12px;padding:14px;
+  border-right:3px solid #a855f7;
+}
+.step-num{
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,#a855f7,#c084fc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:#fff;
+}
+.step-body h5{font-size:14px;font-weight:800;margin-bottom:3px;color:var(--text);}
+.step-body p{font-size:13px;color:var(--muted);line-height:1.5;}
+
+/* GOLDEN RULE */
+.rule{
+  background:linear-gradient(135deg,rgba(255,255,255,.03),transparent);
+  border:1px solid #a855f7;border-radius:14px;padding:18px;
+  text-align:center;margin-top:18px;
+}
+.rule i{font-size:22px;color:#a855f7;margin-bottom:8px;display:block;}
+.rule p{font-size:13px;font-weight:700;line-height:1.65;color:var(--text);}
+
+/* BUBBLE */
+.bub{
+  background:rgba(0,0,0,.3);border-radius:14px;border-bottom-right-radius:0;
+  padding:14px;margin-bottom:10px;border:1px solid var(--border);
+}
+.bub-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase;}
+.bub-ku{color:#a855f7;font-weight:700;margin-bottom:5px;font-size:14px;}
+.bub-ar{font-size:14px;color:var(--text);line-height:1.6;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13.5px;}
+.tbl th{background:rgba(255,255,255,.04);color:#a855f7;padding:10px 14px;text-align:right;font-weight:800;}
+.tbl th:first-child{border-radius:0 10px 10px 0;}
+.tbl th:last-child{border-radius:10px 0 0 10px;}
+.tbl td{padding:10px 14px;background:rgba(255,255,255,.025);color:var(--text);}
+.tbl td:first-child{border-radius:0 8px 8px 0;}
+.tbl td:last-child{border-radius:8px 0 0 8px;}
+.tbl tr:hover td{background:rgba(255,255,255,.04);}
+
+/* CHIPS / TAGS */
+.chip{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;margin:2px;}
+.ch-g{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.25);}
+.ch-r{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.25);}
+.ch-a{background:rgba(255,255,255,.06);color:#a855f7;border:1px solid #a855f7;}
+
+/* FOOTER */
+footer{
+  background:rgba(3,7,15,.95);border-top:1px solid var(--border);
+  padding:44px 5% 28px;text-align:center;position:relative;z-index:1;
+}
+.footer-inner{max-width:800px;margin:0 auto;}
+.footer-brand{
+  font-size:20px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(90deg,#a855f7,#c084fc);-webkit-background-clip:text;color:transparent;
+  margin-bottom:6px;
+}
+.footer-sub{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:16px;}
+.footer-links a{
+  display:flex;align-items:center;gap:6px;
+  color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;
+  transition:.2s;padding:6px 14px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.03);
+}
+.footer-links a:hover{color:#a855f7;border-color:#a855f7;}
+.footer-copy{font-size:12px;color:rgba(122,146,184,.45);line-height:1.8;}
+.footer-copy span{color:#a855f7;font-weight:700;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:768px){
+  .hdr{padding:12px 18px;}
+  .hero{padding:110px 18px 50px;}
+  .sec{padding:0 14px 50px;}
+  .grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+<canvas id="pc"></canvas>
+<div class="wrap">
+
+<header class="hdr">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-bullhorn"></i></div>
+    <div class="brand-text">
+      <h1>قسم التسويق</h1>
+      <p>معرض إيفان للأثاث — دهوك | Marketing Department</p>
+    </div>
+  </div>
+  <span class="dept-chip"><i class="fa-solid fa-bullhorn"></i> بروتوكول العمل</span>
+</header>
+
+<section class="hero">
+  <div class="hero-badge"><i class="fa-solid fa-bullhorn"></i> قسم التسويق</div>
+  <h2>دليل عمل <em>قسم التسويق</em></h2>
+  <p>معايير الأداء الاحترافي، المطلوبات، والممنوعات — دليل شامل ومحدّث لكل موظف في هذا القسم.</p>
+  <div class="stats"><div class="stat"><span class="stat-n">📱</span><span class="stat-l">منصات نشط عليها</span></div><div class="stat"><span class="stat-n">30</span><span class="stat-l">فيديو/شهر مستهدف</span></div><div class="stat"><span class="stat-n">+100</span><span class="stat-l">تقييم/شهر</span></div><div class="stat"><span class="stat-n">#1</span><span class="stat-l">هدفنا بجوجل</span></div></div>
+</section>
+
+<main class="sec">
+
+<div class="grid" style="margin-bottom:26px;">
+  <div class="card">
+    <div class="lb lb-ok">
+      <div class="lb-title"><i class="fa-solid fa-check-circle"></i> المطلوب — 10 مهام أساسية</div>
+      <ul>
+        <li><strong>نشر فيديو يومي قصير</strong> يجذب الانتباه في أول 3 ثواني — Hook قوي لا اختياري.</li>
+        <li><strong>كتابة الاسم الكامل</strong> "معرض إيفان للأثاث — دهوك" في كل بايو ووصف منصة.</li>
+        <li><strong>رفع صور جديدة</strong> بجودة عالية على خرائط جوجل أسبوعياً على الأقل.</li>
+        <li><strong>الرد على كل تعليق ورسالة</strong> خلال 5 دقائق في ساعات العمل — الصمت = خسارة.</li>
+        <li><strong>إرفاق CTA واضح</strong> في نهاية كل بوست وفيديو: "اضغط الرابط لتشاهد القطعة في بيتك".</li>
+        <li><strong>جدولة المحتوى</strong> مسبقاً أسبوعاً كاملاً على الأقل باستخدام Meta Business Suite.</li>
+        <li><strong>إرسال رسالة تقييم</strong> لكل زبون يشتري أونلاين خلال 24 ساعة.</li>
+        <li><strong>إنتاج ريلز "قصة قطعة"</strong> أسبوعياً — جودة الخشب، القماش، والتصنيع بدون موسيقى.</li>
+        <li><strong>تحديث Linktree</strong> الموحد بكل الروابط الفعّالة ووضعه في بايو كل المنصات.</li>
+        <li><strong>تقرير شهري</strong> يشمل: المشاهدات، التقييمات الجديدة، الرسائل الواردة، والمبيعات الأونلاين.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="lb lb-no">
+      <div class="lb-title"><i class="fa-solid fa-ban"></i> الممنوع — 10 أخطاء قاتلة</div>
+      <ul>
+        <li><strong>نشر أكثر من فيديو في ساعة واحدة</strong> — يُزعج المتابعين ويسبب إلغاء المتابعة.</li>
+        <li><strong> نشر بدون قالب ولوجو إيفان </strong> اي تصميم بدون لوجو يحذف ويعدين تصميمه</li>
+        <li><strong>النشر العشوائي بدون فكرة</strong> — صورة عادية بدون Hook أو قيمة لا تُنشر.</li>
+        <li><strong>تجاهل التعليقات السلبية</strong> — كل تعليق سلبي يحتاج رداً لبقاً واحترافياً.</li>
+        <li><strong>نسخ محتوى المنافسين</strong> أو الادعاء بأي شيء غير حقيقي.</li>
+        <li><strong>نشر أسعار خاطئة</strong> أو عروض منتهية دون تحديث.</li>
+        <li><strong>إهمال رصد المنافسين</strong> — يجب متابعتهم أسبوعياً وتطبيق الأفضل فوراً.</li>
+        <li><strong>التعامل مع الشكاوى بجفاء</strong> أو تجاهلها — كل شكوى فرصة لبناء الثقة.</li>
+        <li><strong>نشر محتوى بدون هاشتاغ ولا موقع</strong> داخل الفيديو.</li>
+        <li><strong>إهمال جوجل بيزنس</strong> — يجب بوست جوجل مرة كل 3 أيام على الأقل.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid" style="margin-bottom:26px;">
+  <div class="card">
+    <div class="sec-head" style="margin-bottom:18px;">
+      <div class="sec-icon"><i class="fa-solid fa-clapperboard"></i></div>
+      <div><h3 style="font-size:17px;">هيكل الفيديو الثابت (المعيار الذهبي)</h3></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h5>0 – 3 ث : HOOK الصدمة</h5><p>مشهد قريب جداً + نص كبير. مثال: "غلطة تدمر كنبتك بـ5000$"</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h5>3 – 12 ث : إثبات القيمة</h5><p>لقطة كل ثانية — خشب، قماش، تفصيل — بدون مقدمة طويلة.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h5>12 – 15 ث : CTA واضح</h5><p>"اضغط الرابط لتشاهد القطعة في بيتك" — نص على الشاشة دائماً.</p></div></div>
+    </div>
+    <div class="rule">
+      <i class="fa-solid fa-lightbulb"></i>
+      <p>80% يشاهدون بدون صوت — النصوص الكبيرة إلزامية. التصوير عمودي 9:16 دائماً بدون استثناء.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="sec-head" style="margin-bottom:18px;">
+      <div class="sec-icon"><i class="fa-solid fa-calendar-week"></i></div>
+      <div><h3 style="font-size:17px;">توزيع أدوار الفريق</h3></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num"><i class="fa-solid fa-user-tie"></i></div><div class="step-body"><h5>مازن (مدير التسويق)</h5><p>إشراف + تقارير شهرية + رصد منافسين + ضبط الميزانية + الاستبيانات.</p></div></div>
+      <div class="step"><div class="step-num"><i class="fa-solid fa-camera"></i></div><div class="step-body"><h5>أيوب — الوجه الإعلاني</h5><p>متفرغ 100% للتصوير والظهور والتصميم. ممنوع إشغاله بالردود أو البيع.</p></div></div>
+      <div class="step"><div class="step-num"><i class="fa-solid fa-film"></i></div><div class="step-body"><h5>الند — المونتاج والتصميم</h5><p>مونتاج احترافي + ارسال للمحتوى منظم للمجموعة التصاميم .</p></div></div>
+      <div class="step"><div class="step-num"><i class="fa-solid fa-comments"></i></div><div class="step-body"><h5>سرهاد وعلي — الردود والمبيعات</h5><p>رد خلال 5 دقائق على كل رسالة + تسجيل كل استفسار في موقع الأداء .</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:26px;">
+  <div class="sec-head" style="margin-bottom:16px;">
+    <div class="sec-icon"><i class="fa-solid fa-table-list"></i></div>
+    <div><h3 style="font-size:17px;">الأدوات المعتمدة لقسم التسويق</h3></div>
+  </div>
+  <div style="overflow-x:auto;">
+  <table class="tbl">
+    <tr><th>المهمة</th><th>الأداة</th><th>الأولوية</th></tr>
+    <tr><td>مونتاج الريلز</td><td>CapCut PC</td><td><span class="chip ch-r">فوري</span></td></tr>
+    <tr><td>تصميم البوستات</td><td>Canva Pro</td><td><span class="chip ch-r">فوري</span></td></tr>
+    <tr><td>رابط البايو الموحد</td><td>Linktree</td><td><span class="chip ch-r">اليوم</span></td></tr>
+    <tr><td>روبوت واتساب</td><td>ManyChat / WATI.io</td><td><span class="chip ch-a">قريبا 1</span></td></tr>
+    <tr><td>جدولة النشر</td><td>Meta Business Suite</td><td><span class="chip ch-a">أسبوع 1</span></td></tr>
+    <tr><td>تحليل الأداء</td><td>Metricool</td><td><span class="chip ch-a">أسبوع 2</span></td></tr>
+    <tr><td>معرض 3D</td><td>Matterport / Kuula.co</td><td><span class="chip ch-g">قريبا 2-3</span></td></tr>
+    <tr><td>فلتر AR</td><td>Meta Spark AR Studio</td><td><span class="chip ch-g">قريبا 2-3</span></td></tr>
+  </table>
+  </div>
+</div>
+
+</main>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">IVAN FURNITURE GALLERY</div>
+    <p class="footer-sub">Ivan Furniture Gallery — Duhok, Kurdistan Region, Iraq</p>
+    <div class="footer-links">
+      <a href="tel:+9647502316274"><i class="fa-solid fa-phone"></i> +964 750 231 6274</a>
+      <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+      <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="#"><i class="fa-brands fa-snapchat"></i> Snapchat</a>
+      <a href="#"><i class="fa-solid fa-location-dot"></i> Google Maps</a>
+    </div>
+    <p class="footer-copy">© 2026 Ivan Furniture Gallery — All Rights Reserved.<br>
+    Issued by Ivan Marketing Management | إصدار إدارة تسويق إيفان</p>
+  </div>
+</footer>
+
+</div>
+<script>
+const c=document.getElementById('pc'),cx=c.getContext('2d');
+let W,H,P=[];
+const PC='rgba(168,85,247,0.4)';
+function init(){W=c.width=innerWidth;H=c.height=innerHeight;P=[];for(let i=0;i<50;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.5,vx:Math.random()*.4-.2,vy:Math.random()*.4-.2});}
+function draw(){cx.clearRect(0,0,W,H);P.forEach(p=>{cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=PC;cx.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const d=Math.hypot(P[i].x-P[j].x,P[i].y-P[j].y);if(d<130){cx.beginPath();cx.strokeStyle=`rgba(168,85,247,${(1-d/130)*.12})`;cx.lineWidth=.8;cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke();}}requestAnimationFrame(draw);}
+window.addEventListener('resize',init);init();draw();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');}}),{threshold:.08});
+document.querySelectorAll('.card').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
