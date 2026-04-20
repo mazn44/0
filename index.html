@@ -1,365 +1,627 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قسم التسويق | معرض إيفان للأثاث — دهوك</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
-  --bg:#050b18;--surface:rgba(10,20,40,0.7);--surface2:rgba(6,14,28,0.85);
-  --border:rgba(255,255,255,0.07);--text:#f0f6ff;--muted:#7a92b8;
-  --r:18px;--shadow:0 8px 40px rgba(0,0,0,0.5);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 20% 20%,rgba(168,85,247,0.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(99,102,241,0.10) 0%,transparent 60%);pointer-events:none;z-index:0;}
-#pc{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.wrap{position:relative;z-index:1;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>قسم المبيعات | معرض إيفان</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           المتغيرات الديناميكية (الوضع الغامق - الافتراضي)
+           ========================================= */
+        :root {
+            --bg-base: #030816;
+            --bg-surface: rgba(10, 25, 50, 0.65);
+            --bg-card: rgba(15, 30, 60, 0.4);
+            --bg-card-hover: rgba(20, 40, 80, 0.8);
+            
+            --primary: #3b82f6; 
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --secondary: #0ea5e9; 
+            --accent-gold: #fbbf24;
+            
+            --border-glass: rgba(59, 130, 246, 0.25);
+            --border-glow: rgba(59, 130, 246, 0.6);
+            
+            --text-main: #f8fafc;
+            --text-muted: #93c5fd;
+            --text-dark: #0f172a; /* للوضع الفاتح */
+            
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
 
-::-webkit-scrollbar{width:6px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:linear-gradient(#a855f7,#c084fc);border-radius:10px;}
+        /* المتغيرات الديناميكية (الوضع الفاتح) */
+        [data-theme="light"] {
+            --bg-base: #f0f4f8;
+            --bg-surface: rgba(255, 255, 255, 0.8);
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card-hover: #ffffff;
+            
+            --primary: #2563eb; 
+            --primary-glow: rgba(37, 99, 235, 0.3);
+            --secondary: #0284c7; 
+            --accent-gold: #d97706;
+            
+            --border-glass: rgba(37, 99, 235, 0.2);
+            --border-glow: rgba(37, 99, 235, 0.5);
+            
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
 
-/* HEADER */
-.hdr{
-  position:fixed;top:0;width:100%;z-index:100;
-  background:rgba(5,11,24,0.88);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-  padding:14px 40px;display:flex;justify-content:space-between;align-items:center;
-}
-.brand{display:flex;align-items:center;gap:14px;}
-.brand-icon{
-  width:46px;height:46px;border-radius:14px;
-  background:linear-gradient(135deg,#a855f7,#c084fc);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;color:#fff;box-shadow:0 0 20px rgba(168,85,247,0.15);
-}
-.brand-text h1{font-size:18px;font-weight:900;color:#a855f7;}
-.brand-text p{font-size:11px;color:var(--muted);margin-top:1px;}
-.dept-chip{
-  padding:7px 18px;border-radius:30px;font-size:12px;font-weight:800;letter-spacing:1px;
-  background:rgba(255,255,255,.04);border:1px solid #a855f7;color:#a855f7;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
-/* HERO */
-.hero{
-  text-align:center;padding:130px 5% 60px;
-  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(168,85,247,0.15) 0%,transparent 70%);
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 20px;border-radius:30px;font-size:13px;font-weight:700;letter-spacing:1px;
-  background:rgba(255,255,255,.04);border:1px solid #a855f7;color:#a855f7;
-  margin-bottom:20px;
-}
-.hero h2{font-size:clamp(2em,5vw,3.5em);font-weight:900;margin-bottom:12px;color:var(--text);}
-.hero h2 em{color:#a855f7;font-style:normal;}
-.hero p{font-size:1em;color:var(--muted);max-width:650px;margin:0 auto;line-height:1.75;}
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden; 
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
 
-/* STATS */
-.stats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:40px auto 0;max-width:700px;}
-.stat{
-  flex:1;min-width:120px;text-align:center;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;padding:18px 14px;
-  border-top:2px solid #a855f7;
-}
-.stat-n{font-size:2em;font-weight:900;color:#a855f7;display:block;}
-.stat-l{font-size:12px;color:var(--muted);margin-top:4px;}
+        /* خلفية الكانفاس */
+        #particles-canvas {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;
+        }
 
-/* SECTIONS */
-.sec{max-width:1300px;margin:0 auto;padding:0 5% 70px;}
-.sec-head{
-  display:flex;align-items:center;gap:16px;
-  padding:28px 0 20px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:28px;
-}
-.sec-icon{
-  width:56px;height:56px;border-radius:16px;
-  background:linear-gradient(135deg,#a855f7,#c084fc);
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;color:#fff;box-shadow:0 0 24px rgba(168,85,247,0.15);
-  flex-shrink:0;
-}
-.sec-head h3{font-size:22px;font-weight:900;color:#a855f7;}
-.sec-head p{font-size:13px;color:var(--muted);margin-top:3px;}
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;}
-.grid3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+        /* =========================================
+           زر تبديل الوضع (Light/Dark Toggle)
+           ========================================= */
+        .theme-switch-wrapper {
+            position: fixed; top: 20px; left: 20px; z-index: 100;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .theme-switch {
+            display: inline-block; width: 60px; height: 34px; position: relative;
+        }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #1e293b; transition: .4s; border-radius: 34px;
+            border: 1px solid var(--border-glass); box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .slider:before {
+            position: absolute; content: "\f186"; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            height: 26px; width: 26px; left: 4px; bottom: 3px; background-color: var(--primary);
+            color: #fff; display: flex; justify-content: center; align-items: center; font-size: 14px;
+            transition: .4s; border-radius: 50%; box-shadow: 0 0 10px var(--primary-glow);
+        }
+        input:checked + .slider { background-color: #e2e8f0; }
+        input:checked + .slider:before { transform: translateX(26px); content: "\f185"; background-color: #fbbf24; box-shadow: 0 0 10px rgba(251,191,36,0.5); color: #000; }
 
-/* CARDS */
-.card{
-  background:var(--surface);backdrop-filter:blur(20px);
-  border:1px solid var(--border);border-radius:var(--r);
-  padding:26px;box-shadow:var(--shadow);
-  transition:all .4s cubic-bezier(.175,.885,.32,1.2);
-  position:relative;overflow:hidden;
-  opacity:0;transform:translateY(24px);
-}
-.card.vis{opacity:1;transform:translateY(0);}
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,#a855f7,transparent);
-}
-.card:hover{transform:translateY(-7px);border-color:#a855f7;box-shadow:0 20px 50px rgba(168,85,247,0.15);}
+        /* =========================================
+           الترويسة والتشجيع (Header & Honors)
+           ========================================= */
+        .hero-section {
+            padding: 8vh 20px 5vh; text-align: center; 
+            background: linear-gradient(180deg, rgba(37, 99, 235, 0.15) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-glass);
+            position: relative;
+        }
+        
+        .hero-icon {
+            font-size: clamp(45px, 6vw, 65px); color: var(--primary);
+            filter: drop-shadow(0 0 20px var(--primary-glow));
+            animation: pulse-icon 2s infinite alternate; margin-bottom: 15px;
+        }
+        @keyframes pulse-icon { 0% { transform: scale(1); } 100% { transform: scale(1.08); filter: drop-shadow(0 0 30px var(--primary-glow)); } }
 
-/* LIST BOXES */
-.lb{margin-bottom:18px;}
-.lb-title{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:14px;font-weight:800;padding:6px 16px;border-radius:10px;
-  margin-bottom:14px;
-}
-.lb-ok .lb-title{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.25);}
-.lb-no .lb-title{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.25);}
-.lb ul{list-style:none;padding-right:4px;}
-.lb ul li{
-  position:relative;padding:8px 32px 8px 8px;margin-bottom:6px;
-  font-size:14px;font-weight:500;line-height:1.55;
-  border-radius:10px;background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.04);
-  transition:.25s;
-}
-.lb ul li:hover{background:rgba(255,255,255,.05);}
-.lb-ok ul li::before{
-  content:'✓';position:absolute;right:10px;top:50%;transform:translateY(-50%);
-  font-weight:900;font-size:13px;color:#10b981;
-}
-.lb-no ul li::before{
-  content:'✗';position:absolute;right:10px;top:50%;transform:translateY(-50%);
-  font-weight:900;font-size:13px;color:#ef4444;
-}
-.lb ul li strong{color:var(--text);}
+        .hero-section h1 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: var(--text-main); margin-bottom: 5px; }
+        .hero-section h2 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 700; color: var(--secondary); margin-bottom: 15px; letter-spacing: 2px;}
+        .hero-section p { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-muted); max-width: 850px; margin: 0 auto; line-height: 1.8; font-weight: 500;}
 
-/* SYSTEM STEPS */
-.steps{display:flex;flex-direction:column;gap:10px;}
-.step{
-  display:flex;align-items:flex-start;gap:14px;
-  background:rgba(0,0,0,.25);border-radius:12px;padding:14px;
-  border-right:3px solid #a855f7;
-}
-.step-num{
-  width:34px;height:34px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,#a855f7,#c084fc);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:900;color:#fff;
-}
-.step-body h5{font-size:14px;font-weight:800;margin-bottom:3px;color:var(--text);}
-.step-body p{font-size:13px;color:var(--muted);line-height:1.5;}
+        /* الشعار المركزي */
+        .core-motto {
+            display: inline-block; background: linear-gradient(90deg, rgba(59,130,246,0.1), rgba(16,185,129,0.1));
+            border: 1px solid var(--primary); padding: 10px 30px; border-radius: 30px;
+            font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 900; color: var(--text-main); margin-top: 25px;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        .core-motto i { color: var(--accent-gold); margin-left: 8px; }
 
-/* GOLDEN RULE */
-.rule{
-  background:linear-gradient(135deg,rgba(255,255,255,.03),transparent);
-  border:1px solid #a855f7;border-radius:14px;padding:18px;
-  text-align:center;margin-top:18px;
-}
-.rule i{font-size:22px;color:#a855f7;margin-bottom:8px;display:block;}
-.rule p{font-size:13px;font-weight:700;line-height:1.65;color:var(--text);}
+        /* أوسمة الفريق */
+        .team-honors { margin-top: 40px; }
+        .manager-crown {
+            display: inline-flex; align-items: center; gap: 10px; background: rgba(251, 191, 36, 0.15);
+            border: 2px solid var(--accent-gold); color: var(--accent-gold); padding: 12px 35px;
+            border-radius: 40px; font-weight: 900; font-size: clamp(1.2rem, 2vw, 1.4rem); margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); animation: crown-shine 3s infinite;
+        }
+        @keyframes crown-shine { 0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); } 50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.8); } }
 
-/* BUBBLE */
-.bub{
-  background:rgba(0,0,0,.3);border-radius:14px;border-bottom-right-radius:0;
-  padding:14px;margin-bottom:10px;border:1px solid var(--border);
-}
-.bub-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase;}
-.bub-ku{color:#a855f7;font-weight:700;margin-bottom:5px;font-size:14px;}
-.bub-ar{font-size:14px;color:var(--text);line-height:1.6;}
+        .staff-grid {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+        }
+        .staff-badge {
+            background: var(--bg-card); border: 1px solid var(--border-glass); 
+            padding: 8px 20px; border-radius: 20px; font-weight: 800; color: var(--text-main); 
+            font-size: clamp(0.9rem, 1.5vw, 1rem); display: flex; align-items: center; gap: 8px;
+            transition: 0.3s; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .staff-badge i { color: var(--primary); }
+        .staff-badge:hover { background: var(--primary); color: #fff; transform: translateY(-5px); box-shadow: 0 8px 20px var(--primary-glow); border-color: var(--primary);}
+        .staff-badge:hover i { color: #fff; }
 
-/* TABLE */
-.tbl{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13.5px;}
-.tbl th{background:rgba(255,255,255,.04);color:#a855f7;padding:10px 14px;text-align:right;font-weight:800;}
-.tbl th:first-child{border-radius:0 10px 10px 0;}
-.tbl th:last-child{border-radius:10px 0 0 10px;}
-.tbl td{padding:10px 14px;background:rgba(255,255,255,.025);color:var(--text);}
-.tbl td:first-child{border-radius:0 8px 8px 0;}
-.tbl td:last-child{border-radius:8px 0 0 8px;}
-.tbl tr:hover td{background:rgba(255,255,255,.04);}
+        /* =========================================
+           الهيكل العرضي والبطاقات
+           ========================================= */
+        .container { width: 100%; max-width: 1500px; margin: 0 auto; padding: 40px 15px; }
 
-/* CHIPS / TAGS */
-.chip{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;margin:2px;}
-.ch-g{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.25);}
-.ch-r{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.25);}
-.ch-a{background:rgba(255,255,255,.06);color:#a855f7;border:1px solid #a855f7;}
+        .section-title {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-glass); padding-bottom: 15px;
+        }
+        .section-title i { font-size: clamp(1.8rem, 3vw, 2.2rem); color: var(--secondary); }
+        .section-title h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--text-main); }
+        .section-title span { margin-right: auto; background: rgba(59,130,246,0.15); color: var(--primary); font-weight: 800; padding: 6px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid var(--border-glass);}
 
-/* FOOTER */
-footer{
-  background:rgba(3,7,15,.95);border-top:1px solid var(--border);
-  padding:44px 5% 28px;text-align:center;position:relative;z-index:1;
-}
-.footer-inner{max-width:800px;margin:0 auto;}
-.footer-brand{
-  font-size:20px;font-weight:900;letter-spacing:2px;
-  background:linear-gradient(90deg,#a855f7,#c084fc);-webkit-background-clip:text;color:transparent;
-  margin-bottom:6px;
-}
-.footer-sub{font-size:13px;color:var(--muted);margin-bottom:16px;}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:16px;}
-.footer-links a{
-  display:flex;align-items:center;gap:6px;
-  color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;
-  transition:.2s;padding:6px 14px;border-radius:20px;
-  border:1px solid rgba(255,255,255,.06);
-  background:rgba(255,255,255,.03);
-}
-.footer-links a:hover{color:#a855f7;border-color:#a855f7;}
-.footer-copy{font-size:12px;color:rgba(122,146,184,.45);line-height:1.8;}
-.footer-copy span{color:#a855f7;font-weight:700;}
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        
+        .card {
+            background: var(--bg-surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass); border-radius: 24px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: all 0.4s ease;
+            display: flex; flex-direction: column; position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0; transition: 0.5s; pointer-events: none;
+        }
+        .card:hover::before { opacity: 0.5; transform: scale(1.1); }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--bg-card-hover); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:768px){
-  .hdr{padding:12px 18px;}
-  .hero{padding:110px 18px 50px;}
-  .sec{padding:0 14px 50px;}
-  .grid{grid-template-columns:1fr;}
-  .stats{flex-direction:column;align-items:center;}
-}
-</style>
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; z-index: 2; position: relative;}
+        .card-header i { font-size: 1.6rem; color: var(--primary); }
+        .card-header h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); font-weight: 900; color: var(--text-main); }
+
+        /* =========================================
+           القوائم (بروتوكول الصالة)
+           ========================================= */
+        .rules-ul { list-style: none; display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 2;}
+        .rules-ul li { position: relative; padding-right: 45px; font-size: clamp(0.95rem, 2vw, 1.05rem); line-height: 1.7; color: var(--text-muted); font-weight: 500;}
+        .rules-ul li strong { color: var(--text-main); font-weight: 800; display: block; margin-bottom: 3px; font-size: 1.05em;}
+        .rules-ul li::before {
+            font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; right: 0; top: 4px; width: 28px; height: 28px; border-radius: 8px;
+            display: flex; justify-content: center; align-items: center; font-size: 13px;
+        }
+        .ok-rules li::before { content: '\f00c'; color: var(--success); background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success);}
+        .no-rules li::before { content: '\f00d'; color: var(--danger); background: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger);}
+
+        /* =========================================
+           منهجية البيع (SPIN)
+           ========================================= */
+        .spin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; position: relative; z-index: 2;}
+        .spin-box {
+            background: var(--bg-card); border: 1px solid var(--border-glass); border-top: 4px solid var(--primary);
+            padding: 25px 20px; border-radius: 16px; text-align: center; transition: 0.3s;
+        }
+        .spin-box:hover { background: rgba(59,130,246,0.1); border-color: var(--primary); transform: translateY(-5px);}
+        .spin-letter { font-size: 3rem; font-weight: 900; color: var(--primary); margin-bottom: 10px; line-height: 1;}
+        .spin-title { font-size: 1.15rem; color: var(--text-main); font-weight: 900; margin-bottom: 10px; }
+        .spin-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; font-weight: 500;}
+
+        /* =========================================
+           قسم التقييمات وجوجل مابس (NEW & EXPANDED)
+           ========================================= */
+        .google-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--primary); border-radius: 24px; padding: 40px; margin-bottom: 50px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .google-icon { font-size: 4rem; color: var(--accent-gold); margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(251,191,36,0.4));}
+        .google-card h3 { font-size: 2rem; font-weight: 900; color: var(--text-main); margin-bottom: 15px; }
+        .google-card p { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px; font-weight: 500;}
+        
+        .review-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: right;}
+        .step-box { background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px dashed var(--border-glass);}
+        .step-num { display: inline-block; background: var(--primary); color: #fff; width: 30px; height: 30px; text-align: center; line-height: 30px; border-radius: 50%; font-weight: 900; margin-bottom: 10px;}
+        .step-box h4 { color: var(--text-main); font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;}
+        .step-box p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;}
+
+        /* =========================================
+           نصوص السكريبتات (عربي / باديني)
+           ========================================= */
+        .script-box {
+            background: var(--bg-card); border-radius: 16px; padding: 25px; margin-bottom: 20px;
+            border-right: 5px solid var(--primary); transition: 0.3s; border: 1px solid var(--border-glass); border-right: 5px solid var(--primary);
+            position: relative; z-index: 2;
+        }
+        .script-box:last-child { margin-bottom: 0; }
+        .script-box:hover { background: var(--bg-card-hover); border-color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+        
+        .badge { display: inline-block; background: var(--primary-glow); color: #fff; padding: 6px 15px; border-radius: 8px; font-size: 0.9rem; font-weight: 800; margin-bottom: 15px; }
+        
+        .lang-group { margin-bottom: 15px; }
+        .lang-group:last-child { margin-bottom: 0; padding-top: 15px; border-top: 1px dashed var(--border-glass); }
+        .lang-lbl { font-size: 0.85rem; color: var(--primary); font-weight: 900; margin-bottom: 8px; display: block;}
+        
+        /* الخطوط حسب طلبك */
+        .arabic-txt { font-size: clamp(1.1rem, 2vw, 1.25rem); font-weight: 800; color: var(--text-main); line-height: 1.6; }
+        .badini-txt { font-size: clamp(0.95rem, 1.5vw, 1.1rem); font-weight: 700; color: var(--text-muted); line-height: 1.6; } /* خط باديني أصغر ومفهوم */
+
+        /* =========================================
+           الفوتر الفخم (Marketing Footer)
+           ========================================= */
+        footer {
+            background: var(--bg-base); border-top: 1px solid var(--border-glass);
+            padding: 60px 20px; text-align: center; position: relative; z-index: 10; margin-top: 50px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+        }
+        .footer-logo { font-size: 35px; color: var(--primary); margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--primary-glow));}
+        .footer-title { color: var(--text-main); font-size: 1.5rem; font-weight: 900; margin-bottom: 25px; letter-spacing: 1px;}
+        
+        .marketing-credit {
+            display: inline-block; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--primary);
+            color: var(--primary); padding: 12px 30px; border-radius: 30px; font-size: 1.1rem; font-weight: 800; margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--primary-glow); transition: 0.3s;
+        }
+        .marketing-credit:hover { transform: scale(1.05); background: var(--primary); color: #fff;}
+        
+        .wa-contact {
+            display: inline-flex; align-items: center; gap: 12px; background: rgba(37, 211, 102, 0.15);
+            border: 1px solid rgba(37, 211, 102, 0.5); color: #25d366; padding: 12px 35px;
+            border-radius: 30px; font-weight: 900; font-size: 1.15rem; text-decoration: none; transition: 0.3s;
+        }
+        .wa-contact:hover { background: #25d366; color: #fff; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); transform: translateY(-3px); }
+
+        .footer-copy { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-top: 30px; font-weight: 500;}
+
+        /* استجابة الموبايل */
+        @media (max-width: 768px) {
+            .section-title { flex-direction: column; text-align: center; gap: 10px; }
+            .section-title span { margin: 0 auto; }
+            .staff-grid { gap: 8px; }
+            .staff-badge { font-size: 0.85rem; padding: 6px 15px; }
+            .theme-switch-wrapper { top: 10px; left: 10px; }
+        }
+    </style>
 </head>
 <body>
-<canvas id="pc"></canvas>
-<div class="wrap">
 
-<header class="hdr">
-  <div class="brand">
-    <div class="brand-icon"><i class="fa-solid fa-bullhorn"></i></div>
-    <div class="brand-text">
-      <h1>قسم التسويق</h1>
-      <p>معرض إيفان للأثاث — دهوك | Marketing Department</p>
+    <!-- زر تبديل الوضع الفاتح/الغامق -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" onchange="toggleTheme(this)">
+            <div class="slider"></div>
+        </label>
     </div>
-  </div>
-  <span class="dept-chip"><i class="fa-solid fa-bullhorn"></i> بروتوكول العمل</span>
-</header>
 
-<section class="hero">
-  <div class="hero-badge"><i class="fa-solid fa-bullhorn"></i> قسم التسويق</div>
-  <h2>دليل عمل <em>قسم التسويق</em></h2>
-  <p>معايير الأداء الاحترافي، المطلوبات، والممنوعات — دليل شامل ومحدّث لكل موظف في هذا القسم.</p>
-  <div class="stats"><div class="stat"><span class="stat-n">الكل أكثر من 30 منصة</span><span class="stat-l">منصات نشط عليها</span></div><div class="stat"><span class="stat-n">90</span><span class="stat-l">فيديو/شهر مستهدف</span></div><div class="stat"><span class="stat-n">+100</span><span class="stat-l">تقييم/شهر</span></div><div class="stat"><span class="stat-n">#1</span><span class="stat-l">هدفنا بجوجل</span></div></div>
-</section>
+    <!-- كانفاس الخلفية التفاعلية -->
+    <canvas id="particles-canvas"></canvas>
 
-<main class="sec">
+    <!-- الترويسة وأوسمة الفريق -->
+    <header class="hero-section">
+        <i class="fa-solid fa-handshake-angle hero-icon"></i>
+        <h1>قسم المبيعات | الطوابق السبعة</h1>
+        <h2>Sales Department — Face to Face</h2>
+        <p>فهم احتياج الزبون وتوجيهه للقطعة المناسبة وليس الأغلى. نحن في إيفان لا نبيع الخشب والقماش، نحن نبيع الثقة وراحة البال التي تدوم لسنوات.</p>
+        
+        <div class="core-motto">
+            الأمانة والصدق هما رأس مال إيفان <i class="fa-solid fa-gem"></i>
+        </div>
 
-<div class="grid" style="margin-bottom:26px;">
-  <div class="card">
-    <div class="lb lb-ok">
-      <div class="lb-title"><i class="fa-solid fa-check-circle"></i> المطلوب — 10 مهام أساسية</div>
-      <ul>
-        <li><strong>نشر فيديو يومي قصير</strong> يجذب الانتباه في أول 3 ثواني — Hook قوي لا اختياري.</li>
-        <li><strong>كتابة الاسم الكامل</strong> "معرض إيفان للأثاث — دهوك" في كل بايو ووصف منصة.</li>
-        <li><strong>رفع صور جديدة</strong> بجودة عالية على خرائط جوجل أسبوعياً على الأقل.</li>
-        <li><strong>الرد على كل تعليق ورسالة</strong> خلال 5 دقائق في ساعات العمل — الصمت = خسارة.</li>
-        <li><strong>إرفاق CTA واضح</strong> في نهاية كل بوست وفيديو: "اضغط الرابط لتشاهد القطعة في بيتك".</li>
-        <li><strong>جدولة المحتوى</strong> مسبقاً أسبوعاً كاملاً على الأقل باستخدام Meta Business Suite.</li>
-        <li><strong>إرسال رسالة تقييم</strong> لكل زبون يشتري أونلاين خلال 24 ساعة.</li>
-        <li><strong>إنتاج ريلز "قصة قطعة"</strong> أسبوعياً — جودة الخشب، القماش، والتصنيع بدون موسيقى.</li>
-        <li><strong>تحديث Linktree</strong> الموحد بكل الروابط الفعّالة ووضعه في بايو كل المنصات.</li>
-        <li><strong>تقرير شهري</strong> يشمل: المشاهدات، التقييمات الجديدة، الرسائل الواردة، والمبيعات الأونلاين.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="lb lb-no">
-      <div class="lb-title"><i class="fa-solid fa-ban"></i> الممنوع — 10 أخطاء قاتلة</div>
-      <ul>
-        <li><strong>نشر أكثر من فيديو في ساعة واحدة</strong> — يُزعج المتابعين ويسبب إلغاء المتابعة.</li>
-        <li><strong> نشر بدون هوية بصرية المعرض </strong> ااي قطعة تنشر بدون قالب ولوحو تحذف ويعاد تصميها .</li>
-        <li><strong>النشر العشوائي بدون فكرة</strong> — صورة عادية بدون Hook أو قيمة لا تُنشر.</li>
-        <li><strong>تجاهل التعليقات السلبية</strong> — كل تعليق سلبي يحتاج رداً لبقاً واحترافياً.</li>
-        <li><strong>نسخ محتوى المنافسين</strong> أو الادعاء بأي شيء غير حقيقي.</li>
-        <li><strong>نشر أسعار خاطئة</strong> أو عروض منتهية دون تحديث.</li>
-        <li><strong>إهمال رصد المنافسين</strong> — يجب متابعتهم أسبوعياً وتطبيق الأفضل فوراً.</li>
-        <li><strong>التعامل مع الشكاوى بجفاء</strong> أو تجاهلها — كل شكوى فرصة لبناء الثقة.</li>
-        <li><strong>نشر محتوى بدون هاشتاغ ولا موقع</strong> داخل الفيديو.</li>
-        <li><strong>إهمال جوجل بيزنس</strong> — يجب بوست جوجل مرة كل 3 أيام على الأقل.</li>
-      </ul>
-    </div>
-  </div>
-</div>
+        <div class="team-honors">
+            <!-- وسام المدير -->
+            <div class="manager-crown">
+                <i class="fa-solid fa-crown"></i> مدير المبيعات: راوان
+            </div>
+            
+            <!-- أوسمة الموظفين -->
+            <div class="staff-grid">
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> ابو مهند</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> محمد فريد</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> عبد الله</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> أحمد مراد</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> ريان سليمان</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> ابو هيثم</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> سيراج سعدون</div>
+                <div class="staff-badge"><i class="fa-solid fa-medal"></i> ملا ميلاد</div>
+            </div>
+        </div>
+    </header>
 
-<div class="grid" style="margin-bottom:26px;">
-  <div class="card">
-    <div class="sec-head" style="margin-bottom:18px;">
-      <div class="sec-icon"><i class="fa-solid fa-clapperboard"></i></div>
-      <div><h3 style="font-size:17px;">هيكل الفيديو الثابت (المعيار الذهبي)</h3></div>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><h5>0 – 3 ث : HOOK الصدمة</h5><p>مشهد قريب جداً + نص كبير. مثال: "غلطة تدمر كنبتك ب300$"</p></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><h5>3 – 12 ث : إثبات القيمة</h5><p>لقطة كل ثانية — خشب، قماش، تفصيل — بدون مقدمة طويلة.</p></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><h5>12 – 15 ث : CTA واضح</h5><p>"اضغط الرابط لتشاهد القطعة في بيتك" — نص على الشاشة دائماً.</p></div></div>
-    </div>
-    <div class="rule">
-      <i class="fa-solid fa-lightbulb"></i>
-      <p>80% يشاهدون بدون صوت — النصوص الكبيرة إلزامية. التصوير عمودي 9:16 دائماً بدون استثناء.</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="sec-head" style="margin-bottom:18px;">
-      <div class="sec-icon"><i class="fa-solid fa-calendar-week"></i></div>
-      <div><h3 style="font-size:17px;">توزيع أدوار الفريق</h3></div>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num"><i class="fa-solid fa-user-tie"></i></div><div class="step-body"><h5>مازن (مدير التسويق)</h5><p>إشراف + تقارير شهرية + رصد منافسين + ضبط الميزانية + الاستبيانات.</p></div></div>
-      <div class="step"><div class="step-num"><i class="fa-solid fa-camera"></i></div><div class="step-body"><h5>أيوب — الوجه الإعلاني</h5><p>متفرغ 100% للتصوير والظهور والتصميم. ممنوع إشغاله بالردود أو البيع.</p></div></div>
-      <div class="step"><div class="step-num"><i class="fa-solid fa-film"></i></div><div class="step-body"><h5>الند — المونتاج والنشر</h5><p>مونتاج احترافي + نشر منظم + تطبيق قاعدة فيديو واحد/ساعة.</p></div></div>
-      <div class="step"><div class="step-num"><i class="fa-solid fa-comments"></i></div><div class="step-body"><h5>سرهاد وعلي — الردود والمبيعات</h5><p>رد خلال 5 دقائق على كل رسالة + تسجيل كل استفسار في ملف Excel.</p></div></div>
-    </div>
-  </div>
-</div>
+    <main class="container">
 
-<div class="card" style="margin-bottom:26px;">
-  <div class="sec-head" style="margin-bottom:16px;">
-    <div class="sec-icon"><i class="fa-solid fa-table-list"></i></div>
-    <div><h3 style="font-size:17px;">الأدوات المعتمدة لقسم التسويق</h3></div>
-  </div>
-  <div style="overflow-x:auto;">
-  <table class="tbl">
-    <tr><th>المهمة</th><th>الأداة</th><th>الأولوية</th></tr>
-    <tr><td>مونتاج الريلز</td><td>CapCut PC</td><td><span class="chip ch-r">دائما</span></td></tr>
-    <tr><td>تصميم البوستات</td><td> Photoshop </td><td><span class="chip ch-r">دائما</span></td></tr>
-    <tr><td>رابط البايو الموحد</td><td>Linktree</td><td><span class="chip ch-r">قريبا</span></td></tr>
-    <tr><td>روبوت واتساب</td><td>ManyChat / WATI.io</td><td><span class="chip ch-a">أسبوع 1</span></td></tr>
-    <tr><td>جدولة النشر</td><td>Meta Business Suite</td><td><span class="chip ch-a">أسبوع 1</span></td></tr>
-    <tr><td>تحليل الأداء</td><td>Metricool</td><td><span class="chip ch-a">أسبوع 2</span></td></tr>
-    <tr><td>معرض 3D</td><td>Matterport / Kuula.co</td><td><span class="chip ch-g">شهر 2-3</span></td></tr>
-    <tr><td>فلتر AR</td><td>Meta Spark AR Studio</td><td><span class="chip ch-g">شهر 2-3</span></td></tr>
-  </table>
-  </div>
-</div>
+        <!-- ==========================================
+             المسموح والممنوع (بروتوكول المعرض)
+             ========================================== -->
+        <div class="section-title">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <h2>بروتوكول الصالة (المطلوب والمحظور)</h2>
+            <span><i class="fa-solid fa-fire text-warning"></i> ٣ أسئلة تشخيص | ٢ خيار كحد أقصى للزبون</span>
+        </div>
 
-</main>
+        <div class="grid-cards">
+            <!-- المسموح -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-thumbs-up" style="color: var(--success);"></i>
+                    <h3>المسموح (طريق النجاح)</h3>
+                </div>
+                <ul class="rules-ul ok-rules">
+                    <li><strong>التشخيص أولاً:</strong> سؤال الزبون عن المقاس، اللون، والميزانية قبل عرض الطوابق.</li>
+                    <li><strong>عدم التشتيت:</strong> عرض <strong>خيارين أو ثلاثة — لا أكثر</strong> لتسهيل قرار الزبون.</li>
+                    <li><strong>الشفافية التامة:</strong> شرح الفروقات بين القطع (الخشب، الإسفنج، المنشأ) بوضوح وأمانة.</li>
+                    <li><strong>عقلية المستشار:</strong> اقتراح حلول عملية وتصاميم تناسب بيت الزبون وميزانيته.</li>
+                    <li><strong>المتابعة الودية:</strong> المتابعة بواتساب بعد ساعتين بأسلوب راقٍ إذا غادر الزبون بلا شراء.</li>
+                    <li><strong>العمل كفريق:</strong> توجيه الزبون لطابق آخر وتسليمه لزميل آخر إذا لم يجد ما يبحث عنه في طابقك.</li>
+                </ul>
+            </div>
 
+            <!-- الممنوع -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i>
+                    <h3>الممنوع (الخطوط الحمراء)</h3>
+                </div>
+                <ul class="rules-ul no-rules">
+                    <li><strong>الضغط للبيع:</strong> الضغط والإلحاح على الزبون للشراء الفوري وعدم إعطائه مساحة للتفكير.</li>
+                    <li><strong>القسم بالله:</strong> الحلفان بالله أثناء البيع — الضمان الكتابي والمعاملة الطيبة أقوى من ذلك.</li>
+                    <li><strong>الظل المزعج:</strong> الإلحاح المزعج والمشي خلف الزبون خطوة بخطوة والتضييق عليه.</li>
+                    <li><strong>وهم الخصم:</strong> تضخيم السعر قبل الخصم لإيهامه بتخفيض كبير غير حقيقي (الأمانة أولاً).</li>
+                    <li><strong>الكذب التجاري:</strong> الكذب بشأن توفر القطعة في المخزن أو حالتها (جديد/مستعمل).</li>
+                    <li><strong>التشهير:</strong> مقارنة المعرض بالمنافسين سلباً. إيفان ينافس نفسه فقط بجودته.</li>
+                </ul>
+            </div>
+        </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">IVAN FURNITURE GALLERY</div>
-    <p class="footer-sub">Ivan Furniture Gallery — Duhok, Kurdistan Region, Iraq</p>
-    <div class="footer-links">
-      <a href="tel:+9647502316274"><i class="fa-solid fa-phone"></i> +964 750 231 6274</a>
-      <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-      <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-      <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
-      <a href="#"><i class="fa-brands fa-snapchat"></i> Snapchat</a>
-      <a href="#"><i class="fa-solid fa-location-dot"></i> Google Maps</a>
-    </div>
-    <p class="footer-copy">© 2026 Ivan Furniture Gallery — All Rights Reserved.<br>
-    Issued by Ivan Marketing Management | إصدار إدارة تسويق إيفان</p>
-  </div>
-</footer>
+        <!-- ==========================================
+             منهجية SPIN
+             ========================================== -->
+        <div class="section-title">
+            <i class="fa-solid fa-brain"></i>
+            <h2>منهجية البيع الاحترافي (SPIN)</h2>
+            <span>خطوات إغلاق الصفقة بذكاء</span>
+        </div>
+        
+        <div class="card" style="margin-bottom: 50px;">
+            <div class="spin-grid">
+                <div class="spin-box">
+                    <div class="spin-letter">S</div>
+                    <div class="spin-title">Situation (الموقف)</div>
+                    <div class="spin-desc">افهم حالة الزبون: هل يؤسس شقة جديدة أم يجدد غرفة واحدة؟</div>
+                </div>
+                <div class="spin-box">
+                    <div class="spin-letter">P</div>
+                    <div class="spin-title">Problem (المشكلة)</div>
+                    <div class="spin-desc">ما مشكلة أثاثه القديم؟ (هبوط الإسفنج، ضيق المساحة، اللون؟)</div>
+                </div>
+                <div class="spin-box">
+                    <div class="spin-letter">I</div>
+                    <div class="spin-title">Implication (التأثير)</div>
+                    <div class="spin-desc">وضح له العواقب: "لو أخذت طقم كبير جداً ستضيق الغرفة وتفقد جمالها".</div>
+                </div>
+                <div class="spin-box">
+                    <div class="spin-letter">N</div>
+                    <div class="spin-title">Need-payoff (الحل)</div>
+                    <div class="spin-desc">قدم قطعة إيفان كحل: "هذه الزاوية ستوفر مساحة وتعطيك فخامة مضاعفة".</div>
+                </div>
+            </div>
+        </div>
 
-</div>
-<script>
-const c=document.getElementById('pc'),cx=c.getContext('2d');
-let W,H,P=[];
-const PC='rgba(168,85,247,0.4)';
-function init(){W=c.width=innerWidth;H=c.height=innerHeight;P=[];for(let i=0;i<50;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.5,vx:Math.random()*.4-.2,vy:Math.random()*.4-.2});}
-function draw(){cx.clearRect(0,0,W,H);P.forEach(p=>{cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=PC;cx.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const d=Math.hypot(P[i].x-P[j].x,P[i].y-P[j].y);if(d<130){cx.beginPath();cx.strokeStyle=`rgba(168,85,247,${(1-d/130)*.12})`;cx.lineWidth=.8;cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke();}}requestAnimationFrame(draw);}
-window.addEventListener('resize',init);init();draw();
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');}}),{threshold:.08});
-document.querySelectorAll('.card').forEach(el=>io.observe(el));
-</script>
+        <!-- ==========================================
+             قسم التقييمات وجوجل مابس (الجديد والموسع)
+             ========================================== -->
+        <div class="google-card">
+            <i class="fa-brands fa-google google-icon"></i>
+            <h3>استراتيجية تقييمات جوجل (Google Maps)</h3>
+            <p>هدفنا هو 100 تقييم 5 نجوم شهرياً. التقييم العالي يرفع مصداقية المعرض ويجلب زبائن جدد بدون إعلانات. تقييم الزبون هو شهادة شرف لك وللمعرض.</p>
+            
+            <div class="review-steps">
+                <div class="step-box">
+                    <span class="step-num">1</span>
+                    <h4>التوقيت المثالي</h4>
+                    <p>لا تطلب التقييم عند الدخول. اطلبه بعد إتمام البيعة، أو بعد تقديم الضيافة والقهوة للزبون وهو مرتاح.</p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">2</span>
+                    <h4>كيف تطلب التقييم؟ (عربي)</h4>
+                    <p>"أستاذي، شرفتنا اليوم. إذا كنت مرتاح من خدمتي وشرحي، أتمنى تدعمني بتقييم 5 نجوم وتكتب اسمي بتعليقك، هذا يرفع معنوياتي جداً."</p>
+                </div>
+                <div class="step-box">
+                    <span class="step-num">3</span>
+                    <h4>تسهيل العملية</h4>
+                    <p>افتح الباركود (QR Code) الخاص بالمعرض من هاتفك أو من اللوحة، واطلب من الزبون مسحه بكاميرا هاتفه ليفتح التقييم فوراً.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             نصوص التعامل والسكربتات
+             ========================================== -->
+        <div class="section-title">
+            <i class="fa-solid fa-comments"></i>
+            <h2>نصوص التعامل المعتمدة (الكلمة الطيبة)</h2>
+            <span>التحدث بلغة الزبون يصنع الألفة</span>
+        </div>
+
+        <div class="grid-cards">
+            <div class="card" style="grid-column: 1 / -1;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    
+                    <div class="script-box">
+                        <span class="badge">الترحيب (Xweş hatî)</span>
+                        <div class="lang-group">
+                            <span class="lang-lbl">عربي (واضح وقوي)</span>
+                            <div class="arabic-txt">أهلاً وسهلاً أخي العزيز، نورت المعرض. تفضل كيف أقدر أساعدك؟</div>
+                        </div>
+                        <div class="lang-group">
+                            <span class="lang-lbl">باديني (لأهل دهوك)</span>
+                            <div class="badini-txt">خوێش هاتی، چاوا دشێم خزمته تە بکەم؟</div>
+                        </div>
+                    </div>
+
+                    <div class="script-box">
+                        <span class="badge">التشخيص (Pirs)</span>
+                        <div class="lang-group">
+                            <span class="lang-lbl">عربي</span>
+                            <div class="arabic-txt">ما قياس الغرفة؟ لون الجدار؟ الميزانية التقريبية حتى أطلعك على الأنسب؟</div>
+                        </div>
+                        <div class="lang-group">
+                            <span class="lang-lbl">باديني</span>
+                            <div class="badini-txt">قییاسا ژووری تە چەندە؟ رەنگا دیوارا چیە؟ بودجەی تە نزیکێ چەندە؟</div>
+                        </div>
+                    </div>
+
+                    <div class="script-box">
+                        <span class="badge">المتابعة والتوديع (Xatirê te)</span>
+                        <div class="lang-group">
+                            <span class="lang-lbl">عربي</span>
+                            <div class="arabic-txt">شرفتونا بزيارتكم، المعرض معرضكم بأي وقت، وأي استفسار إحنا حاضرين.</div>
+                        </div>
+                        <div class="lang-group">
+                            <span class="lang-lbl">باديني</span>
+                            <div class="badini-txt">خاتری تە، هەر کاتێ تو هاتی دکەی مە ل وێ دەرۆ دا نە.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ==========================================
+         الفوتر الختامي (مقدم من التسويق)
+         ========================================== -->
+    <footer>
+        <i class="fa-solid fa-chess-knight footer-logo"></i>
+        <div class="footer-title">IVAN FURNITURE GALLERY</div>
+        
+        <div class="marketing-credit">
+            <i class="fa-solid fa-bullseye"></i> تم التخطيط بواسطة: قسم التسويق 
+        </div>
+        <br>
+        <a href="https://wa.me/9647502316274" class="wa-contact" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> تواصل معنا   : 9647502316274
+        </a>
+
+        <div class="footer-copy">
+            جميع الحقوق محفوظة © 2026 معرض إيفان للأثاث — دهوك<br>
+            Developed & Designed for Excellence
+        </div>
+    </footer>
+
+    <!-- سكربتات التفاعل (الجزيئات والوضع الليلي/النهاري) -->
+    <script>
+        // نظام التبديل بين الفاتح والغامق
+        function toggleTheme(checkbox) {
+            if(checkbox.checked) {
+                document.body.setAttribute('data-theme', 'light');
+            } else {
+                document.body.removeAttribute('data-theme');
+            }
+        }
+
+        // نظام الجزيئات التفاعلية المتقدمة (تتفاعل مع الماوس)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        let mouse = { x: null, y: null, radius: 100 }; // شعاع تفاعل الماوس
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        // لتجنب بقاء الماوس عالقاً عند الخروج من الشاشة
+        window.addEventListener('mouseout', function() {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            let particleCount = window.innerWidth < 768 ? 40 : 80;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 2 + 1,
+                    baseX: Math.random() * width,
+                    baseY: Math.random() * height,
+                    vx: Math.random() * 0.5 - 0.25,
+                    vy: Math.random() * 0.5 - 0.25
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // تحديد لون الجزيئات بناءً على الثيم
+            let isLightMode = document.body.getAttribute('data-theme') === 'light';
+            let particleColor = isLightMode ? 'rgba(37, 99, 235, 0.5)' : 'rgba(59, 130, 246, 0.5)';
+            ctx.fillStyle = particleColor;
+            
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // التفاعل مع الماوس (تأثير التنافر/الهروب)
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - p.x;
+                    let dy = mouse.y - p.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const directionX = forceDirectionX * force * 5;
+                        const directionY = forceDirectionY * force * 5;
+                        p.x -= directionX;
+                        p.y -= directionY;
+                    }
+                }
+
+                // الحركة الطبيعية
+                p.x += p.vx; p.y += p.vy;
+                
+                // الارتداد
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+            });
+
+            // رسم الخطوط
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = isLightMode ? `rgba(37, 99, 235, ${(1 - dist/120) * 0.2})` : `rgba(59, 130, 246, ${(1 - dist/120) * 0.15})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawParticles);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        drawParticles();
+    </script>
 </body>
-    </html>
+</html>
+
+ 
